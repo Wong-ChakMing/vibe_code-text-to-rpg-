@@ -1,0 +1,160 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  color: #333;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+h1 {
+  text-align: center;
+  color: white;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  font-size: 2.5rem;
+}
+
+.api-selector {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.api-selector label {
+  color: white;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.api-selector select {
+  padding: 8px 15px;
+  border-radius: 5px;
+  border: none;
+  background: white;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.chat-container {
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  overflow: hidden;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-history {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  max-height: 500px;
+  background: #f8f9fa;
+}
+
+.message {
+  margin-bottom: 15px;
+  padding: 12px;
+  border-radius: 10px;
+  max-width: 80%;
+}
+
+.user-message {
+  background: #007bff;
+  color: white;
+  margin-left: auto;
+  text-align: right;
+}
+
+.ai-message {
+  background: #e9ecef;
+  color: #333;
+  border-left: 4px solid #28a745;
+}
+
+.input-container {
+  display: flex;
+  padding: 20px;
+  background: white;
+  border-top: 1px solid #eee;
+}
+
+#userInput {
+  flex: 1;
+  padding: 12px 15px;
+  border: 2px solid #ddd;
+  border-radius: 25px;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+#userInput:focus {
+  border-color: #007bff;
+}
+
+#sendButton {
+  margin-left: 10px;
+  padding: 12px 25px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  min-width: 80px;
+}
+
+#sendButton:hover {
+  background: #0056b3;
+}
+
+#sendButton:disabled {
+  background: #6c757d;
+  cursor: not-allowed;
+}
+
+.loading {
+  text-align: center;
+  color: white;
+  font-size: 18px;
+  margin-top: 10px;
+  animation: pulse 1.5s infinite;
+}
+
+.hidden {
+  display: none;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+.error {
+  background: #dc3545 !important;
+  color: white;
+  border-left: 4px solid #721c24 !important;
+}
+
+.fallback {
+  background: #ffeaa7 !important;
+  color: #2d3436;
+  border-left: 4px solid #fdcb6e !important;
+}
