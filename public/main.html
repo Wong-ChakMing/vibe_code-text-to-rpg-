@@ -3,31 +3,73 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AI Text-to-RPG</title>
+    <title data-i18n="title">AI Text-to-RPG</title>
     <link rel="stylesheet" href="main.css" />
   </head>
   <body>
     <div class="container">
-      <h1>AI Text-to-RPG Adventure</h1>
-      <div class="api-selector">
-        <label for="apiSelect">AI Provider:</label>
-        <select id="apiSelect">
-          <option value="openrouter">OpenRouter</option>
-          <option value="azure">Azure OpenAI</option>
-        </select>
+      <h1 data-i18n="title">AI Text-to-RPG Adventure</h1>
+      <div class="selectors">
+        <div class="api-selector">
+          <label for="apiSelect" data-i18n="apiProvider">AI Provider:</label>
+          <select id="apiSelect">
+            <option value="openrouter">OpenRouter</option>
+            <option value="azure">Azure OpenAI</option>
+          </select>
+        </div>
+        <div class="story-mode-selector">
+          <label for="storyModeSelect" data-i18n="storyMode">Story Mode:</label>
+          <select id="storyModeSelect">
+            <option value="fantasy" data-i18n="storyModes.fantasy">
+              Fantasy
+            </option>
+            <option value="romantic" data-i18n="storyModes.romantic">
+              Romantic
+            </option>
+            <option value="xianxia" data-i18n="storyModes.xianxia">
+              Xianxia
+            </option>
+            <option value="mystery" data-i18n="storyModes.mystery">
+              Mystery Detective
+            </option>
+            <option value="scifi" data-i18n="storyModes.scifi">
+              Science Fiction
+            </option>
+            <option value="horror" data-i18n="storyModes.horror">
+              Horror Survival
+            </option>
+          </select>
+        </div>
+        <div class="language">
+          <label for="languageSelect" data-i18n="language">Language:</label>
+          <select id="languageSelect">
+            <option value="en">English</option>
+            <option value="zh">简体中文</option>
+            <option value="zh-TW">繁體中文</option>
+          </select>
+        </div>
       </div>
       <div class="chat-container">
+        <div id="User-Setting-Container"></div>
         <div id="chatHistory" class="chat-history"></div>
+        <div class="button-container">
+          <button id="option1" class="options"></button>
+          <button id="option2" class="options"></button>
+          <button id="option3" class="options"></button>
+        </div>
         <div class="input-container">
           <input
             type="text"
             id="userInput"
+            data-i18n-placeholder="inputPlaceholder"
             placeholder="Describe your next action..."
           />
-          <button id="sendButton">Send</button>
+          <button id="sendButton" data-i18n="sendButton">Send</button>
         </div>
       </div>
-      <div id="loading" class="loading hidden">Thinking...</div>
+      <div id="loading" class="loading hidden" data-i18n="loading">
+        Thinking...
+      </div>
     </div>
     <script src="index.js"></script>
   </body>

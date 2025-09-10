@@ -7,8 +7,26 @@
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
   min-height: 100vh;
   color: #333;
+  position: relative;
+  transition: all 0.5s ease;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: -1;
+  transition: all 0.5s ease;
 }
 
 .container {
@@ -18,6 +36,8 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  position: relative;
+  z-index: 1;
 }
 
 h1 {
@@ -28,32 +48,42 @@ h1 {
   font-size: 2.5rem;
 }
 
-.api-selector {
-  text-align: center;
+.selectors {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
   margin-bottom: 20px;
+  flex-wrap: wrap;
 }
 
-.api-selector label {
+.api-selector, .story-mode-selector, .language {
+  text-align: center;
+}
+
+.api-selector label, .story-mode-selector label, .language label {
   color: white;
   font-weight: bold;
   margin-right: 10px;
+  display: block;
+  margin-bottom: 5px;
 }
 
-.api-selector select {
+.api-selector select, .story-mode-selector select, .language select {
   padding: 8px 15px;
   border-radius: 5px;
   border: none;
   background: white;
   font-size: 14px;
   cursor: pointer;
+  min-width: 140px;
 }
 
 .chat-container {
-  background: white;
+  background: rgb(255, 255, 255,0.1);
   border-radius: 15px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.2);
   overflow: hidden;
-  flex: 1;
+  height: 600px;
   display: flex;
   flex-direction: column;
 }
@@ -62,8 +92,27 @@ h1 {
   flex: 1;
   padding: 20px;
   overflow-y: auto;
-  max-height: 500px;
-  background: #f8f9fa;
+  background: rgb(255, 255, 255,0.1);
+  min-height: 0;
+}
+
+/* Custom scrollbar styling for chat history */
+.chat-history::-webkit-scrollbar {
+  width: 8px;
+}
+
+.chat-history::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.chat-history::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 10px;
+}
+
+.chat-history::-webkit-scrollbar-thumb:hover {
+  background: #a1a1a1;
 }
 
 .message {
@@ -86,11 +135,23 @@ h1 {
   border-left: 4px solid #28a745;
 }
 
+.system-message {
+  background: #fff3cd;
+  color: #856404;
+  border-left: 4px solid #ffc107;
+  text-align: center;
+  font-weight: bold;
+  margin: 10px auto;
+  max-width: 60%;
+}
+
 .input-container {
   display: flex;
   padding: 20px;
-  background: white;
+  background: rgba(255, 255, 255, 0.1);
   border-top: 1px solid #eee;
+  flex-shrink: 0;
+  min-height: 80px;
 }
 
 #userInput {
@@ -157,4 +218,198 @@ h1 {
   background: #ffeaa7 !important;
   color: #2d3436;
   border-left: 4px solid #fdcb6e !important;
+}
+
+.truncated {
+  background: #ddd6fe !important;
+  color: #5b21b6;
+  border-left: 4px solid #8b5cf6 !important;
+}
+
+/* Background themes for different story modes */
+body.fantasy-theme {
+  background-image: url('./src/Fantasy.png');
+}
+
+body.romantic-theme {
+  background-image: url('./src/Romantic.png');
+}
+
+body.xianxia-theme {
+  background-image: url('./src/Xianxia.png');
+}
+
+body.mystery-theme {
+  background-image: url('./src/Mystery_Detective.png');
+}
+
+body.scifi-theme {
+  background-image: url('./src/Science_Fiction.png');
+}
+
+body.horror-theme {
+  background-image: url('./src/Horror_Survival.png');
+}
+
+/* Default gradient background when no theme is applied */
+body.default-theme {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+/* Button container styling */
+.button-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 15px 0;
+  padding: 0 20px;
+}
+
+/* Option button styling */
+.options {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 15px 20px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+  text-align: left;
+  line-height: 1.4;
+  min-height: 50px;
+  display: none; /* Hidden by default, shown by JavaScript */
+  border: 2px solid transparent;
+}
+
+.options:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.options:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 10px rgba(40, 167, 69, 0.3);
+}
+
+.options:focus {
+  outline: none;
+  border-color: #ffc107;
+  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3), 0 0 0 3px rgba(255, 193, 7, 0.3);
+}
+
+/* Option button animations */
+@keyframes optionFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.options[style*="inline-block"] {
+  animation: optionFadeIn 0.4s ease-out;
+}
+
+/* Different colors for different option numbers */
+#option1 {
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+}
+
+#option1:hover {
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
+}
+
+#option2 {
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+}
+
+#option2:hover {
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+}
+
+#option3 {
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+}
+
+#option3:hover {
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 6px 20px rgba(220, 53, 69, 0.4);
+}
+
+/* Responsive design for smaller screens */
+@media (max-height: 700px) {
+  .chat-container {
+    height: 400px;
+  }
+  
+  .button-container {
+    margin: 10px 0;
+    padding: 0 15px;
+    gap: 8px;
+  }
+  
+  .options {
+    padding: 12px 15px;
+    font-size: 14px;
+    min-height: 45px;
+  }
+}
+
+@media (max-height: 500px) {
+  .chat-container {
+    height: 300px;
+  }
+  
+  .input-container {
+    min-height: 60px;
+    padding: 15px;
+  }
+  
+  .button-container {
+    margin: 8px 0;
+    padding: 0 10px;
+    gap: 6px;
+  }
+  
+  .options {
+    padding: 10px 12px;
+    font-size: 13px;
+    min-height: 40px;
+  }
+}
+
+@media (max-width: 600px) {
+  .button-container {
+    padding: 0 10px;
+  }
+  
+  .options {
+    font-size: 15px;
+    padding: 12px 15px;
+  }
+}
+
+@media (max-width: 400px) {
+  .button-container {
+    padding: 0 5px;
+    gap: 8px;
+  }
+  
+  .options {
+    font-size: 14px;
+    padding: 10px 12px;
+    border-radius: 10px;
+  }
 }
