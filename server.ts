@@ -1,6 +1,7 @@
 import express, { Request, Response } from "express";
 import path from "path";
 import fs from "fs";
+import dotenv from "dotenv";
 import { saveToFile, readFromFile } from "./utils/file";
 import {
   addLanguageToSystemPrompt,
@@ -8,8 +9,11 @@ import {
   getUITranslations,
 } from "./utils/language";
 
+// Load environment variables
+dotenv.config();
+
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 // TypeScript interfaces
 interface StoryPrompt {
@@ -62,29 +66,12 @@ try {
   };
 }
 
-// Read API keys from .env file
-let API_KEY_AZURE: string = "";
-let API_KEY_OPENROUTER: string = "";
-try {
-  const envContent: string = fs.readFileSync(".env", "utf8");
+// Read API keys from environment variables
+const API_KEY_AZURE: string = process.env.API_KEY_AZURE || "";
+const API_KEY_OPENROUTER: string = process.env.API_KEY_OPENROUTER || "";
 
-  // Get Azure API key (api-key-3)
-  const azureKeyLine: string | undefined = envContent
-    .split("\n")
-    .find((line: string) => line.startsWith("api-key-3:"));
-  if (azureKeyLine) {
-    API_KEY_AZURE = azureKeyLine.split(":")[1].trim();
-  }
-
-  // Get OpenRouter API key (api-key-2)
-  const openrouterKeyLine: string | undefined = envContent
-    .split("\n")
-    .find((line: string) => line.startsWith("api-key-2:"));
-  if (openrouterKeyLine) {
-    API_KEY_OPENROUTER = openrouterKeyLine.split(":")[1].trim();
-  }
-} catch (error) {
-  console.error("Error reading .env file:", error);
+if (!API_KEY_AZURE || !API_KEY_OPENROUTER) {
+  console.warn("Warning: API keys not found in environment variables");
 }
 
 // Middleware

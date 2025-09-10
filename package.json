@@ -12,6 +12,7 @@
     "prod": "npm run build && node dist/server.js"
   },
   "dependencies": {
+    "dotenv": "^17.2.2",
     "express": "^4.21.2",
     "ts-node": "^10.9.2"
   },
