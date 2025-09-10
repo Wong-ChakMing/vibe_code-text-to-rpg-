@@ -30,10 +30,10 @@ body::before {
 }
 
 .container {
-  max-width: 800px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
-  min-height: 100vh;
+  padding: 10px;
+  min-height: 120vh;
   display: flex;
   flex-direction: column;
   position: relative;

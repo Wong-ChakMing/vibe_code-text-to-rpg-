@@ -162,6 +162,9 @@ class RPGChat {
       this.option3.textContent = options[2];
       this.option3.style.display = "inline-block";
     }
+
+    // Auto-scroll when options are shown
+    this.scrollToBottom();
   }
 
   selectOption(optionNumber) {
@@ -531,7 +534,21 @@ class RPGChat {
 
     messageDiv.textContent = text;
     this.chatHistoryDiv.appendChild(messageDiv);
-    this.chatHistoryDiv.scrollTop = this.chatHistoryDiv.scrollHeight;
+
+    // Ensure auto-scroll to bottom with improved reliability
+    this.scrollToBottom();
+  }
+
+  scrollToBottom() {
+    // Use requestAnimationFrame to ensure DOM has been updated
+    requestAnimationFrame(() => {
+      this.chatHistoryDiv.scrollTop = this.chatHistoryDiv.scrollHeight;
+
+      // Double-check with a small delay for complex content
+      setTimeout(() => {
+        this.chatHistoryDiv.scrollTop = this.chatHistoryDiv.scrollHeight;
+      }, 10);
+    });
   }
 
   setLoading(isLoading) {

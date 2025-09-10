@@ -238,9 +238,6 @@ app.post("/api/chat/openrouter", async (req, res) => {
     console.log(`Response length: ${aiResponse.length} characters`);
     console.log(`Finish reason: ${data.choices[0].finish_reason}`);
 
-    console.log(aiResponse);
-    saveToFile("ai_response.txt", aiResponse);
-
     if (wasTruncated) {
       console.warn("Response was truncated due to length limit");
     }
